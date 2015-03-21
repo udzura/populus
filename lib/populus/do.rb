@@ -11,6 +11,7 @@ module Populus
     class << self
       def register_object(o)
         instance.objects << o
+        puts "Registered: #{o.inspect}"
       end
 
       def accept(input)

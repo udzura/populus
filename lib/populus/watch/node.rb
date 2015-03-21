@@ -6,7 +6,7 @@ module Populus
       end
 
       def on_receive(&b)
-        @on_receive_hooks << &b
+        @on_receive_hooks << b
       end
 
       def accept(json)

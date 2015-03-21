@@ -1,0 +1,7 @@
+# -*- mode: ruby -*-
+
+Populus.watch 'node' do
+  on_receive do |json|
+    p json
+  end
+end

@@ -5,7 +5,7 @@ module Populus
   module DSL
     def watch(arg, &b)
       watching = find_watch_obj(arg)
-      watching.instance_eval &b
+      watching.instance_eval(&b)
       Do.register_object watching
     end
 
@@ -17,7 +17,7 @@ module Populus
     def eval_setting(path)
       load path
     rescue => e
-      STDERR.puts "Invalid setting format! #{path}", "error is:", e,
+      STDERR.puts "Invalid setting format! #{path}", "error is:", e
       exit 1
     end
   end
