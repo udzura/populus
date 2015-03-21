@@ -13,6 +13,13 @@ module Populus
       const = arg.gsub(/(^.|_.)/) {|c| c.tr('_', '').upcase }
       Watch.const_get(const).new
     end
+
+    def eval_setting(path)
+      load path
+    rescue => e
+      STDERR.puts "Invalid setting format! #{path}", "error is:", e,
+      exit 1
+    end
   end
 
   extend DSL

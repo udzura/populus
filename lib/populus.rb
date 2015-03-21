@@ -1,5 +1,5 @@
-require "populus/version"
+module Populus; end
 
-module Populus
-  # Your code goes here...
-end
+require "populus/do"
+require "populus/dsl"
+require "populus/version"

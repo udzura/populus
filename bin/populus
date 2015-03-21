@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+# -*- mode: ruby -*-
+
+require 'populus'
+
+mode = ARGV[0] # This is for forward compatibility
+if mode != 'accept'
+  puts "Unknown arg: #{mode}"
+  exit 127
+end
+
+setting = ARGV[1]
+
+Populus.eval_setting setting
+
+data = STDIN.read
+Populus::Do.accept data
