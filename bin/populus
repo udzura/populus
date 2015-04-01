@@ -16,7 +16,7 @@ when 'watch'
   count = (ARGV[2] || 1).to_i
   Populus::Daemon.run(setting, count)
 else
-  puts "Unknown arg: #{mode}"
+  Populus.logger.error "Unknown arg: #{mode}"
   exit 127
 end
 
