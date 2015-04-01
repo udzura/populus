@@ -3,15 +3,21 @@
 
 require 'populus'
 
-mode = ARGV[0] # This is for forward compatibility
-if mode != 'accept'
+mode = ARGV[0]
+setting = ARGV[1]
+
+case mode
+when 'accept'
+  Populus.eval_setting setting
+
+  data = STDIN.read
+  Populus::Do.accept data
+when 'watch'
+  count = (ARGV[2] || 1).to_i
+  Populus::Daemon.run(setting, count)
+else
   puts "Unknown arg: #{mode}"
   exit 127
 end
 
-setting = ARGV[1]
-
-Populus.eval_setting setting
-
-data = STDIN.read
-Populus::Do.accept data
+exit 0
