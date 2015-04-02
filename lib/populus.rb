@@ -1,7 +1,7 @@
 module Populus; end
 
 require "logger"
-require "populus/do"
+require "populus/pool"
 require "populus/dsl"
 require "populus/daemon"
 require "populus/watch_thread"

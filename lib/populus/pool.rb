@@ -2,8 +2,9 @@ require 'singleton'
 require 'json'
 
 module Populus
-  class Do
+  class Pool
     include Singleton
+
     def objects
       @objects ||= []
     end
