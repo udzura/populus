@@ -10,7 +10,7 @@ module Populus
         )
         stdin.close
         while l = stdout.gets
-          puts "accept JSON: %s" % l
+          Populus.logger.info "accept JSON: %s" % l
         end
       end
       return wait
