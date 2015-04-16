@@ -7,18 +7,23 @@ module Populus
       def initialize(cond: nil, runs: nil, metadata: {})
         self.condition = cond
         self.runner = runs
-        self.metadata = matadata
+        self.metadata = metadata
       end
 
       def type?(t)
-        self.class.name.downcase == t
+        current_type = self.class.name.downcase
+          .split('::')
+          .last
+        current_type == t
       end
 
       def accept(data)
         if condition[data]
+          Populus.logger.debug "Condition judged true: #{data.inspect}"
           runner[data]
           return true
         else
+          Populus.logger.debug "Condition judged false: #{data.inspect}"
           return false
         end
       end

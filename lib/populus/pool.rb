@@ -12,7 +12,7 @@ module Populus
     class << self
       def register_object(o)
         instance.objects << o
-        puts "Registered: #{o.inspect}"
+        Populus.logger.info "Registered: #{o.inspect}"
       end
 
       # TODO: Trying Enumerable#lazy

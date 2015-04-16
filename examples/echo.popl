@@ -1,7 +1,11 @@
 # -*- mode: ruby -*-
+require 'base64'
 
-Populus.watch 'node' do
-  on_receive do |json|
-    p json
+Populus.watch :event, name: "sample" do
+  When {|data| data.any?{|d| d.has_key?('Payload')} }
+  Runs do |data|
+    event = data.find{|d| d.has_key?('Payload')}
+    Populus.logger.info "From populus!!!"
+    Populus.logger.info Base64.decode64(event['Payload'])
   end
 end
