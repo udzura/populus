@@ -15,11 +15,13 @@ module Populus
         puts "Registered: #{o.inspect}"
       end
 
-      def accept(input)
-        json = JSON.parse(input)
-        instance.objects.each do |o|
-          o.accept json
-        end
+      # TODO: Trying Enumerable#lazy
+      def events
+        instance.objects.select {|o| o.type?('event') }
+      end
+
+      def find_events_by_name(name)
+        events.select{|o| o.has_name?(name) }
       end
     end
   end
