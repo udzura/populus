@@ -8,13 +8,11 @@ setting = ARGV[1]
 
 case mode
 when 'accept'
-  Populus.eval_setting setting
-
-  data = STDIN.read
-  Populus::Do.accept data
+  # FIXME: implement one-time runner
+  Populus.logger.error "FIXME: implement one-time runner"
+  exit 127
 when 'watch'
-  count = (ARGV[2] || 1).to_i
-  Populus::Daemon.run(setting, count)
+  Populus::Daemon.run(setting: setting)
 else
   Populus.logger.error "Unknown arg: #{mode}"
   exit 127

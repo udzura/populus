@@ -28,6 +28,12 @@ module Populus
       def has_name?(name)
         metadata[:name] == name
       end
+
+      def create_thread
+        _name = metadata[:name]
+        Populus.logger.debug "Create thread: consul watch -type event -name #{_name}"
+        Populus::WatchThread.consul_watch('-type', 'event', '-name', _name)
+      end
     end
   end
 end

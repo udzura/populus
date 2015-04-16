@@ -23,6 +23,12 @@ module Populus
       def find_events_by_name(name)
         events.select{|o| o.has_name?(name) }
       end
+
+      def gen_threads
+        instance.objects.map { |o|
+          o.create_thread
+        }
+      end
     end
   end
 end
