@@ -1,9 +1,10 @@
 module Populus
   class Accepter
+    # TODO: validators
     class Base
       attr_accessor :condition, :runner, :metadata
 
-      def initialize(cond, runs, metadata)
+      def initialize(cond: nil, runs: nil, metadata: {})
         self.condition = cond
         self.runner = runs
         self.metadata = matadata
