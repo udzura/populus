@@ -8,14 +8,15 @@ module Populus
       end
 
       def register_host(hostname)
-        @nodes[hostname] = gen_host(hostname)
+        registory[hostname] = gen_host(hostname)
       end
 
       private
       def gen_host(hostname)
         return Specinfra::Backend::Ssh.new(
           host: hostname,
-          ssh_options: Populus.config.ssh_options
+          ssh_options: Populus.config.ssh_options,
+          request_pty: true
         )
       end
     end

@@ -1,4 +1,5 @@
 require 'populus/pool'
+require 'populus/node'
 require 'populus/accepter'
 
 module Populus
@@ -41,9 +42,10 @@ module Populus
       Pool.register_object accepter
     end
 
-    def find_accepter(type)
-      const = type.gsub(/(^.|_.)/) {|c| c.tr('_', '').upcase }
-      Accepter.const_get(const)
+    def node(*nodes)
+      nodes.each do |node|
+        Node.register_host(node)
+      end
     end
 
     def eval_setting(path)
@@ -51,6 +53,13 @@ module Populus
     rescue => e
       STDERR.puts "Invalid setting format! #{path}", "error is:", e.class, e.message, e.backtrace
       exit 1
+    end
+
+    private
+
+    def find_accepter(type)
+      const = type.gsub(/(^.|_.)/) {|c| c.tr('_', '').upcase }
+      Accepter.const_get(const)
     end
   end
 
