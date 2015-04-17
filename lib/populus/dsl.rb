@@ -4,8 +4,8 @@ require 'populus/accepter'
 module Populus
 
   # Populus.watch :event, name: "sample" do
-  #   When {|data| data.has_key?('Payload') }
-  #   Runs do |data|
+  #   cond {|data| data.has_key?('Payload') }
+  #   runs do |data|
   #     Populus.logger.info Base64.decode(data['Payload'])
   #   end
   # end
@@ -15,11 +15,11 @@ module Populus
         @wrap_obj = wrap_obj
       end
 
-      def When(&do_foobar)
+      def cond(&do_foobar)
         @wrap_obj.condition = do_foobar
       end
 
-      def Runs(&do_foobar)
+      def runs(&do_foobar)
         @wrap_obj.runner = do_foobar
       end
     end

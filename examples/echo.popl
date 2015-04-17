@@ -2,8 +2,8 @@
 require 'base64'
 
 Populus.watch :event, name: "sample" do
-  When {|data| data.any?{|d| d.has_key?('Payload')} }
-  Runs do |data|
+  cond {|data| data.any?{|d| d.has_key?('Payload')} }
+  runs do |data|
     event = data.find{|d| d.has_key?('Payload')}
     Populus.logger.info "From populus!!!"
     Populus.logger.info Base64.decode64(event['Payload'])
