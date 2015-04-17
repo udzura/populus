@@ -20,7 +20,7 @@ module Populus
       def accept(data)
         if condition[data]
           Populus.logger.debug "Condition judged true: #{data.inspect}"
-          runner[data]
+          instance_exec(data, &runner)
           return true
         else
           Populus.logger.debug "Condition judged false: #{data.inspect}"

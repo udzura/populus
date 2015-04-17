@@ -1,4 +1,4 @@
-require 'populus/dsl'
+require 'populus/accepter'
 
 module Populus
   module Helpers
@@ -9,7 +9,7 @@ module Populus
         define_method(name, &block)
       end
       Populus.logger.info "Register helper: #{name}"
-      DSL::DSLContext.send :include, m
+      Accepter::Base.send :include, m
     end
   end
 end
