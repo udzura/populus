@@ -1,13 +1,7 @@
 module Populus; end
 
 require "logger"
-require "populus/pool"
-require "populus/configuration"
-require "populus/dsl"
-require "populus/daemon"
-require "populus/watch_thread"
 require "populus/default_logger"
-require "populus/version"
 
 module Populus
   class << self
@@ -17,3 +11,11 @@ module Populus
   self.consul_bin = 'consul' # default to count on $PATH
   self.logger = Populus::DefaultLogger
 end
+
+require "populus/pool"
+require "populus/helpers"
+require "populus/configuration"
+require "populus/dsl"
+require "populus/daemon"
+require "populus/watch_thread"
+require "populus/version"

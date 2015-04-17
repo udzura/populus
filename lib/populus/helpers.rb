@@ -8,11 +8,12 @@ module Populus
       m = Module.new do
         define_method(name, &block)
       end
+      Populus.logger.info "Register helper: #{name}"
       DSL::DSLContext.send :include, m
     end
   end
 end
 
-Dir.glob("#{File.dirname __FILE__}/*.rb").each do |helper|
+Dir.glob("#{File.dirname __FILE__}/helpers/*.rb").each do |helper|
   require helper
 end
