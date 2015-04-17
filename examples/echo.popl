@@ -1,11 +1,17 @@
 # -*- mode: ruby -*-
 require 'base64'
 
+Populus.config do
+  set :slack_webhook, "https://hooks.slack.com/services/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"
+end
+
 Populus.watch :event, name: "sample" do
   cond {|data| data.any?{|d| d.has_key?('Payload')} }
   runs do |data|
     event = data.find{|d| d.has_key?('Payload')}
     Populus.logger.info "From populus!!!"
     Populus.logger.info Base64.decode64(event['Payload'])
+
+    notify_to_slack("Hello!!!\nConsul event payload:\n>>> `#{event.inspect}`", channel: '#bot_test', username: "Populus")
   end
 end
