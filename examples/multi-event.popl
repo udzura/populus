@@ -1,0 +1,29 @@
+# -*- mode: ruby -*-
+require 'base64'
+
+Populus.watch :event, name: "test001" do
+  cond {|data| data.any?{|d| d.has_key?('Payload')} }
+  runs do |data|
+    event = data.find{|d| d.has_key?('Payload')}
+    Populus.logger.info "From populus!!! this is test001"
+    Populus.logger.info Base64.decode64(event['Payload'])
+  end
+end
+
+Populus.watch :event, name: "test002" do
+  cond {|data| data.any?{|d| d.has_key?('Payload')} }
+  runs do |data|
+    event = data.find{|d| d.has_key?('Payload')}
+    Populus.logger.info "From populus!!! this is test002"
+    Populus.logger.info Base64.decode64(event['Payload'])
+  end
+end
+
+Populus.watch :event, name: "test003" do
+  cond {|data| data.any?{|d| d.has_key?('Payload')} }
+  runs do |data|
+    event = data.find{|d| d.has_key?('Payload')}
+    Populus.logger.info "From populus!!! this is test003"
+    Populus.logger.info Base64.decode64(event['Payload'])
+  end
+end
