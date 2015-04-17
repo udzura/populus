@@ -23,24 +23,40 @@ Or install it yourself as:
 ### Usages below are just a draft
 
 ```ruby
-Populus.watch 'node' do
-  on_receive do |nodes|
-    if nodes.count < 10
-	  logger.warn "nodes are too short!"
-	end
+Populus.config do
+  set :slack_webhook, "https://hooks.slack.com/services/XXXXXX"
+end
+
+Populus.watch :event, name: "echo" do
+  cond {|data| data.any?{|d| d.has_key?('Payload')} }
+  runs do |data|
+    event = data.find{|d| d.has_key?('Payload')}
+    Populus.logger.info "From populus!!!"
+    Populus.logger.info Base64.decode64(event['Payload'])
+  end
+end
+
+Populus.watch :event, name: slack do
+  cond {|data| data.any?{|d| d.has_key?('Payload')} }
+  runs do |data|
+    event = data.first
+
+    notify_to_slack("Hello!!!\nConsul event payload:\n>>> `#{event.inspect}`", channel: '#test', username: "Populus")
   end
 end
 ```
 
 ```bash
-consul watch -type node "bundle exec populus accept sample.popl"
+bundle exec populus watch sample.popl
 ```
 
 ### TODOs
 
-* Deployment switching by node name
-* Condition phrase against JSON
-* Local/remote execution by specinfra
+* [ ] Deployment switching by node name
+* [x] Condition phrase against JSON
+* [ ] Local/remote execution by specinfra
+* [ ] More helpers
+* [ ] Omnibusify
 
 ## Contributing
 
