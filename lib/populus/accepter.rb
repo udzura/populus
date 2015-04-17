@@ -1,3 +1,6 @@
+require 'populus/remote_runner'
+require 'populus/node'
+
 module Populus
   class Accepter
     # TODO: validators
@@ -25,6 +28,15 @@ module Populus
         else
           Populus.logger.debug "Condition judged false: #{data.inspect}"
           return false
+        end
+      end
+
+      def on(hostname, &run_it)
+        be = Node.registory[hostname]
+        if be
+          RemoteRunner.new(be, &run_it)
+        else
+          Populus.logger.warn "Not found host: #{hostname}. Skip."
         end
       end
     end
