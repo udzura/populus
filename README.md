@@ -36,7 +36,7 @@ Populus.watch :event, name: "echo" do
   end
 end
 
-Populus.watch :event, name: slack do
+Populus.watch :event, name: "slack" do
   cond {|data| data.any?{|d| d.has_key?('Payload')} }
   runs do |data|
     event = data.first
