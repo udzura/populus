@@ -3,10 +3,21 @@ require 'populus/accepter'
 
 module Populus
 
+  # Populus.node 'web001.exapmle.jp', 'web002.exapmle.jp'
+  #
   # Populus.watch :event, name: "sample" do
   #   cond {|data| data.has_key?('Payload') }
   #   runs do |data|
   #     Populus.logger.info Base64.decode(data['Payload'])
+  #   end
+  # end
+  #
+  # Populus.watch :event, name: "sample2" do
+  #   cond {|data| data.has_key?('Payload') }
+  #   runs do |data|
+  #     on 'web001.exapmle.jp' do
+  #       execute 'whoami'
+  #     end
   #   end
   # end
   module DSL
