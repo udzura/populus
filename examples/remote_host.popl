@@ -1,0 +1,19 @@
+# -*- mode: ruby -*-
+Populus.config do
+  set :ssh_options, {
+    user: 'operator',
+    keys: '~/.ssh/sample.pem'
+  }
+end
+
+Populus.node 'web001.example.jp'
+
+Populus.watch :event, name: "run-command" do
+  cond {|_| true }
+  runs do |data|
+    on 'web001.example.jp' do
+      execute "uptime"
+      execute "whoami"
+    end
+  end
+end
