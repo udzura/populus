@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "specinfra"
+  spec.add_dependency "sshkit"
   spec.add_dependency "colorize"
   spec.add_dependency "slack-notifier"
 
