@@ -3,12 +3,12 @@ require 'specinfra'
 module Populus
   class Node
     class << self
-      def registory
+      def registry
         @nodes ||= {}
       end
 
       def register_host(hostname)
-        registory[hostname] = gen_host(hostname)
+        registry[hostname] = gen_host(hostname)
       end
 
       private

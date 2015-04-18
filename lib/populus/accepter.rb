@@ -32,7 +32,7 @@ module Populus
       end
 
       def on(hostname, &run_it)
-        be = Node.registory[hostname]
+        be = Node.registry[hostname]
         if be
           RemoteRunner.new(be, &run_it)
         else
