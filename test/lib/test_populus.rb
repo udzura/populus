@@ -5,4 +5,11 @@ class TestPopulus < Test::Unit::TestCase
     assert { Populus.logger == l }
   end
 
+  def test_consul_bin_accessible
+    assert("Havind default value") { Populus.consul_bin == "consul" }
+
+    Populus.consul_bin = "/opt/consul/bin/consul"
+    assert { Populus.consul_bin == "/opt/consul/bin/consul" }
+  end
+
 end
