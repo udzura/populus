@@ -6,12 +6,16 @@ Populus.config do
 end
 
 Populus.watch :event, name: "sample" do
-  cond {|data| data.any?{|d| d.has_key?('Payload')} }
+  cond {|data| data.any?{|d| !d['Payload'].nil? } }
   runs do |data|
-    event = data.find{|d| d.has_key?('Payload')}
+    event = data.find{|d| !d['Payload'].nil? }
     Populus.logger.info "From populus!!!"
     Populus.logger.info Base64.decode64(event['Payload'])
 
-    notify_to_slack("Hello!!!\nConsul event payload:\n>>> `#{event.inspect}`", channel: '#bot_test', username: "Populus")
+    notify_to_slack(<<-EOF, channel: '#bot_test', username: "Populus")
+Hello!!!
+Consul event payload:
+>>> `#{event.inspect}`"
+    EOF
   end
 end
