@@ -30,5 +30,16 @@ module Populus
       FileUtils.rm_f(file.path)
     end
 
+    def upload_file(to_path, local: nil)
+      raise ArgumentError unless local
+      @backend.send_file(local, to_path)
+      Populus.logger.info("Upload Successfully: %s to %s" % [local, to_path])
+    end
+
+    def upload_dir(to_dir, local: nil)
+      raise ArgumentError unless local
+      @backend.send_directory(local, to_dir)
+      Populus.logger.info("Upload Directory Successfully: %s to %s" % [local, to_dir])
+    end
   end
 end
